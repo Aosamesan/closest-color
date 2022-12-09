@@ -1,25 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {Provider} from 'react-redux'
+import store from './states'
+import {Container, Grid} from "@mui/material";
+import ColorBox from "./ColorBox";
+import {ColorSetList} from "./ColorSetList";
+import ControlPanel from "./ControlPanel";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Container sx={{ py: 2}}>
+        <Grid container spacing={2} sx={{ pb: 1 }}>
+          <Grid item xs={4}>
+            <ColorBox title="Preview Color" type="preview" />
+          </Grid>
+          <Grid item xs={4}>
+            <ColorBox title="Current Color" type="current" />
+          </Grid>
+          <Grid item xs={4}>
+            <ColorBox title="Closest Color Set" type="closest" />
+          </Grid>
+        </Grid>
+        <Grid container spacing={2}>
+          <Grid item xs={8}>
+            <ControlPanel />
+          </Grid>
+          <Grid item xs={4}>
+            <ColorSetList />
+          </Grid>
+        </Grid>
+      </Container>
+    </Provider>
   );
 }
 
